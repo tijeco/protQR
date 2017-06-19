@@ -1,8 +1,13 @@
 import PIL.ImageDraw as ImageDraw,PIL.Image as Image, PIL.ImageShow as ImageShow
-
+import random
 sequence = "CRREEQLRIQRSELLEGRNPRGVKMRWLLGIFLIALLACASAKKIPQAEDTEKDQLDLIEEDDNLNEVESNDDVASNEVAGGYTPDPCLKVRCGAGRVCEVNDKGEGECVCIPECPQETDDRRKVCSNHNETWNSDCEVYQMRCYCAEDTEECKTKTYKHVHVDYYGECRDIPKCSEEEMEDFPRRMREWLFNIMQDLAQRSELDDPYLELEKEAERDLAKKWSNAVIWKFCDLDSHPFDRSVSRHELFPIRAPLLAMEHCIAPFLDKCDADDDHRISLKEWGLCLGLKENEIEDKCSAIRDNQ"
-
+sequence1 = "KGDLACYFFHLIPFVCEICHCKSSKMAPPCFTELGKDAKDIFSKGYNFSLVKLDCKTKTRGGMEFTVSGSSNTESGKVSSSLETKYKVPEYGMTLKEKWTTDNVLSTEVAVEDKLIKGSKFSFNGTFVPLTGKKSGVLKSAFKAENVHLNADVDLDMKGPLIHCASVLGLKGWLFGAQSSFDTCKSKVSRCNFALGYSTDDFVLHTNVNDGQEFGAAIYQKVDSNLETGVQLGWAAGNNATAFGLGCVYSLDKDTSLRAKINNTSQIGLGITHKLRDGIKLTLSAMIDGRSFNQGGHKLGIGLDLEA"
+rando = ""
+sequence2 = "AAACCCCA"
 aminoAcids = "ACDEFGHIKLMNPQRSTVWY"
+for i in range(300):
+    rando += random.choice(aminoAcids)
+#print(rando)
 number = 0
 aa2merPos = {}
 for row in aminoAcids:
@@ -10,23 +15,25 @@ for row in aminoAcids:
         # print(row,column, number)
         aa2merPos[row+column]=number
         number+=1
+
 # print(aa2merPos)
 
 def makeKmers(st,k):
-    kmerDict = {}
+    kmerList = []
     for i in range(len(st)-k+1):
         kmer = st[i:i+k]
-        if kmer not in kmerDict:
-            kmerDict[kmer] = 1
-        else:
-            kmerDict[kmer]+=1
-    return kmerDict
-# print(makeKmers(sequence,3))
+        kmerList.append(kmer)
+        # if kmer not in kmerDict:
+        #     kmerDict[kmer] = 1
+        # else:
+        #     kmerDict[kmer]+=1
+    return kmerList
+# print(makeKmers(sequence2,3))
 
 def deBleh(st,k):
     dt = makeKmers(st,k)
     deBruignGraph = {}
-    for i in dt.keys():
+    for i in dt:
         # nextDownMer = makeKmers(i,k-1)
         nextMerPair = (i[0:2],i[1:3])
         if nextMerPair not in deBruignGraph:
@@ -34,8 +41,8 @@ def deBleh(st,k):
         else:
             deBruignGraph[nextMerPair] += 1
     return deBruignGraph
-# print(deBleh(sequence,3))
-seqDeBleh = deBleh(sequence,3)
+# print(deBleh(sequence2,3))
+seqDeBleh = deBleh(rando,3)
 im = Image.new("RGB", (400,400))
 draw = ImageDraw.Draw(im)
 draw.rectangle ((0, 400, 400, 0), (95,215,214))
