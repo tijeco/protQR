@@ -1,0 +1,57 @@
+import PIL.ImageDraw as ImageDraw,PIL.Image as Image, PIL.ImageShow as ImageShow
+
+sequence = "CRREEQLRIQRSELLEGRNPRGVKMRWLLGIFLIALLACASAKKIPQAEDTEKDQLDLIEEDDNLNEVESNDDVASNEVAGGYTPDPCLKVRCGAGRVCEVNDKGEGECVCIPECPQETDDRRKVCSNHNETWNSDCEVYQMRCYCAEDTEECKTKTYKHVHVDYYGECRDIPKCSEEEMEDFPRRMREWLFNIMQDLAQRSELDDPYLELEKEAERDLAKKWSNAVIWKFCDLDSHPFDRSVSRHELFPIRAPLLAMEHCIAPFLDKCDADDDHRISLKEWGLCLGLKENEIEDKCSAIRDNQ"
+
+aminoAcids = "ACDEFGHIKLMNPQRSTVWY"
+number = 0
+aa2merPos = {}
+for row in aminoAcids:
+    for column in aminoAcids:
+        # print(row,column, number)
+        aa2merPos[row+column]=number
+        number+=1
+# print(aa2merPos)
+
+def makeKmers(st,k):
+    kmerDict = {}
+    for i in range(len(st)-k+1):
+        kmer = st[i:i+k]
+        if kmer not in kmerDict:
+            kmerDict[kmer] = 1
+        else:
+            kmerDict[kmer]+=1
+    return kmerDict
+# print(makeKmers(sequence,3))
+
+def deBleh(st,k):
+    dt = makeKmers(st,k)
+    deBruignGraph = {}
+    for i in dt.keys():
+        # nextDownMer = makeKmers(i,k-1)
+        nextMerPair = (i[0:2],i[1:3])
+        if nextMerPair not in deBruignGraph:
+            deBruignGraph[nextMerPair] = 1
+        else:
+            deBruignGraph[nextMerPair] += 1
+    return deBruignGraph
+# print(deBleh(sequence,3))
+seqDeBleh = deBleh(sequence,3)
+im = Image.new("RGB", (400,400))
+draw = ImageDraw.Draw(im)
+draw.rectangle ((0, 400, 400, 0), (95,215,214))
+for i in seqDeBleh.keys():
+    print(aa2merPos[i[0]],aa2merPos[i[1]],seqDeBleh[i])
+
+
+
+
+    draw.point((aa2merPos[i[0]],aa2merPos[i[1]]))
+
+#Background & Island
+
+# draw.ellipse ((50, 170, 350, 250), (29,108,29))
+# draw.ellipse ((300, 30, 360, 90), (245,245,89))
+# draw.rectangle ((0, 300, 400, 200), (15,16,134))
+
+
+# im.show()
