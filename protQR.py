@@ -77,6 +77,8 @@ line2print = ""
 
 #NOTE this can also be generalized if number of loops is indicated by k in kmer, makes huge list though as k goes up
 aminoAcids = "ACDEFGHIKLMNPQRSTVWY"
+number = 0
+aa2merPos = {}
 for row in aminoAcids:
     for column in aminoAcids:
         aa2merPos[row+column]=number
