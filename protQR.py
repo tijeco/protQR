@@ -71,7 +71,7 @@ def printMe(st):
     # print(line2print)
     return line2print[:-1]
 # print(printMe(sequence))
-titleList = np.zeros((400))
+titleList = [None]*400
 aa2merPos = {}
 line2print = ""
 
@@ -85,19 +85,16 @@ for row in aminoAcids:
         number+=1
 for i in aa2merPos:
     titleList[aa2merPos[i]] = i
+    # print(aa2merPos[i],i,titleList[aa2merPos[i]])
 title = ""
 for i in titleList:
-    title = i+","
+
+    title += str(i)+","
+# print(title[:-1])
 
 with open(outFile,"w") as out:
-    out.write(title[:-1]+"\n")
+    out.write("label,"+title[:-1]+"\n")
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         headerStr, seq = ff
         out.write(headerStr+","+printMe(seq)+"\n")
-# print(len(printMe(sequence).split(",")))
-    # kList[aa2merPos[pair]]=kB[i]
-
-# print(kList)
-
-# kList[1]=1
