@@ -5,6 +5,14 @@ import numpy as np
 import sys
 from itertools import groupby
 
+def fasta_iter(fasta_name):
+    fh = open(fasta_name)
+    faiter = (x[1] for x in groupby(fh, lambda line: line[0] == ">"))
+    for header in faiter:
+        headerStr = header.__next__()[1:].strip().split()[0]#Entire line, add .split[0] for just first column
+        seq = "".join(s.strip() for s in faiter.__next__())
+        yield (headerStr, seq)
+
 def getOptionValue(option):
     optionPos = [i for i, j in enumerate(sys.argv) if j == option][0]
     optionValue = sys.argv[optionPos + 1]
