@@ -34,7 +34,7 @@ def aafreq(sequence):
 title = "label,"+ aminoAcids
 sequence_iterator = fasta_iter(pepFile)
 with open("out.csv","w") as out:
-    out.write(title+"\n")
+    out.write(title+"\n") 
     for ff in sequence_iterator:
         headerStr, seq = ff
         out.write(headerStr+","+aafreq(seq)+"\n")
