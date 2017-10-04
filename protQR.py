@@ -58,7 +58,7 @@ def kBreuin(st,n):
     return kGraph
 
 def printMe(st):
-    aminoAcids = "ACDEFGHIKLMNPQRSTVWY"
+    aminoAcids = "ACDEFGHIKLMNPQRSTVWYX"
     number = 0
     aa2merPos = {}
     line2print = ""
@@ -84,7 +84,7 @@ aa2merPos = {}
 line2print = ""
 
 #NOTE this can also be generalized if number of loops is indicated by k in kmer, makes huge list though as k goes up
-aminoAcids = "ACDEFGHIKLMNPQRSTVWY"
+aminoAcids = "ACDEFGHIKLMNPQRSTVWYX"
 number = 0
 aa2merPos = {}
 for row in aminoAcids:
