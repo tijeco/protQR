@@ -85,7 +85,7 @@ for i in aa2merPos:
 title = ""
 for i in titleList:
     title = i+","
-for i in
+
 with open(outFile,"w") as out:
     out.write(title[:-1]+"\n")
     sequence_iterator = fasta_iter(inFile)
