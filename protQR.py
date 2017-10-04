@@ -79,7 +79,7 @@ def printMe(st):
     # print(line2print)
     return line2print[:-1]
 # print(printMe(sequence))
-titleList = [None]*400
+titleList = [None]*441
 aa2merPos = {}
 line2print = ""
 
