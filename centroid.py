@@ -6,6 +6,7 @@
 #  - numpy
 #  - scipy
 #  - matplotlib
+#  - pandas
 
 """
 conda install conda-execute --channel=conda-forge
@@ -19,9 +20,6 @@ import random
 import pandas as pd
 import numpy as np
 from scipy import ndimage
-
-
-
 import sys
 from itertools import groupby
 
@@ -77,7 +75,7 @@ def seqMatrixNoLen(seq):
     for i in range(len(seq)):
         a[i] = factors_dict[seq[i]]
     return a
-with open(inFile.strip().split(".")[0]+"_"+prefix,"w") as out:
+with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         seq, headerStr = ff
