@@ -99,7 +99,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
                 for i in centroid:
                     line2write+= str(i)+","
-                print("writing stuff")
+                # print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
                 0
@@ -109,7 +109,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
                     line2write+= str(i)+","
-                print("writing stuff")
+                # print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
                 0
