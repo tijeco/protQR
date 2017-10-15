@@ -86,16 +86,16 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
                 for i in centroid:
                     line2write+= i+","
-                print("writing stuff")
+                # print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
-                print("error with" +seq)
+                # print("error with" +seq)
         elif prefix == "witLen.csv":
             try:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
                     line2write+= i+","
-                print("writing stuff")
+                # print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
-                print("error with" +seq)
+                # print("error with" +seq)
