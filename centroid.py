@@ -78,7 +78,7 @@ def seqMatrixNoLen(seq):
 with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
-        seq, headerStr = ff
+        headerStr,seq = ff
         line2write = ""
         if prefix == "noLen.csv":
             try:
