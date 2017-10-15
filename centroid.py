@@ -35,6 +35,21 @@ def getOptionValue(option):
     optionPos = [i for i, j in enumerate(sys.argv) if j == option][0]
     optionValue = sys.argv[optionPos + 1]
     return optionValue
+factors = pd.read_csv("factors.csv",header='infer').as_matrix()
+factors_dict = {}
+for i in factors:
+    # print(i[0])
+    factors_dict[i[0]] = i[1:6]
+def seqMatrixWitLen(seq):
+    a = np.empty(shape=(len(seq),6))
+    for i in range(len(seq)):
+        a[i][0] = np.arcsin(np.sqrt((i+1.0)/len(seq)))*len(seq)
+        a[i][1:6] = factors_dict[seq[i]]
+    return a
+
+
+
+
 
 if "-not" in sys.argv:
     inFile = getOptionValue("-not")
@@ -48,6 +63,9 @@ elif "-with" in sys.argv:
 
 else:
     # input_directory = "data/"
+    # centroid = seqMatrixWitLen("AA").mean(axis=0)
+    # print(centroid)
+
     print("\nplease specify input file name using -not or -with <file_name> \n")
     sys.exit()
 
@@ -64,12 +82,7 @@ def randProt(n,seq):
         prot+=random.choice(seq)
     return prot
 
-def seqMatrixWitLen(seq):
-    a = np.empty(shape=(len(seq),6))
-    for i in range(len(seq)):
-        a[i][0] = np.arcsin(np.sqrt((i+1.0)/len(seq)))*len(seq)
-        a[i][1:6] = factors_dict[seq[i]]
-    return a
+
 def seqMatrixNoLen(seq):
     a = np.empty(shape=(len(seq),5))
     for i in range(len(seq)):
@@ -85,7 +98,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
             try:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
                 for i in centroid:
-                    line2write+= i+","
+                    line2write+= str(i)+","
                 print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
@@ -95,7 +108,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
             try:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
-                    line2write+= i+","
+                    line2write+= str(i)+","
                 print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
