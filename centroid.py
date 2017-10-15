@@ -94,4 +94,5 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                     line2write+= i+","
             except:
                 print("error with" +seq)
+        print("writing stuff")
         out.write(line2write[:-1]+'\n')
