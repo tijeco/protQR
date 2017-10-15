@@ -47,10 +47,11 @@ elif "-with" in sys.argv:
 
 
 
+
 else:
     # input_directory = "data/"
     print("\nplease specify input file name using -not or -with <file_name> \n")
-    # sys.exit()
+    sys.exit()
 
 
 factors = pd.read_csv("factors.csv",header='infer').as_matrix()
@@ -81,7 +82,7 @@ with open(inFile.strip().split(".")[0]+"_"+prefix,"w") as out:
     for ff in sequence_iterator:
         seq, headerStr = ff
         line2write = ""
-        if prefix == "noLen.csv"
+        if prefix == "noLen.csv":
             try:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
                 for i in centroid:
@@ -96,27 +97,3 @@ with open(inFile.strip().split(".")[0]+"_"+prefix,"w") as out:
             except:
                 print("error with" +seq)
         out.write(line2write[:-1]+'\n')
-
-
-# aa1 = "IIII"
-# aa2 = "IIILLLLL"
-# seq1=seqMatrixWitLen(aa1)
-# seq2 = seqMatrixWitLen(aa2)
-# seq3 = seqMatrixNoLen(aa1)
-# seq4 = seqMatrixNoLen(aa2)
-#
-#
-# # print(randMat.shape[1])
-# mean1 = seq1.mean(axis=0)
-# mean2 = seq2.mean(axis=0)
-# mean3 = seq3.mean(axis=0)
-# mean4 = seq4.mean(axis=0)
-#
-#
-# dist1 = np.linalg.norm(mean1-mean2)
-# # dist2 = np.linalg.norm(mean3,mean4)
-# # print(np.linalg.norm(mean3-mean4))
-# dist2 = np.linalg.norm(mean3-mean4)
-# print(dist1)
-# print(dist2)
-# # print(dist2)
