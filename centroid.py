@@ -95,7 +95,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
         # print(seq)
         line2write = label+","
         if prefix == "noLen.csv":
-            out.wite("label,f1,f2,f3,f4,f5")
+            out.write("label,f1,f2,f3,f4,f5")
 
             try:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
@@ -109,7 +109,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 0
                 # print("error with" +seq)
         elif prefix == "witLen.csv":
-            out.wite("label,pos,f1,f2,f3,f4,f5")
+            out.write("label,pos,f1,f2,f3,f4,f5")
             try:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
