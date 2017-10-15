@@ -98,7 +98,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
         headerStr, seq = ff
         # print(seq)
         line2write = label+","
-
+        if prefix == "noLen.csv":
 
             try:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
