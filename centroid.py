@@ -89,6 +89,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
+                0
                 # print("error with" +seq)
         elif prefix == "witLen.csv":
             try:
@@ -98,4 +99,5 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 print("writing stuff")
                 out.write(line2write[:-1]+'\n')
             except:
+                0
                 # print("error with" +seq)
