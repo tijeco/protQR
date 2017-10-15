@@ -87,15 +87,18 @@ def seqMatrixNoLen(seq):
     for i in range(len(seq)):
         a[i] = factors_dict[seq[i]]
     return a
-with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
 
+with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
+    if prefix == "noLen.csv":
+        out.write("label,f1,f2,f3,f4,f5\n")
+    elif prefix == "witLen.csv":
+        out.write("label,pos,f1,f2,f3,f4,f5\n")
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         headerStr, seq = ff
         # print(seq)
         line2write = label+","
-        if prefix == "noLen.csv":
-            out.write("label,f1,f2,f3,f4,f5")
+
 
             try:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
@@ -109,7 +112,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 0
                 # print("error with" +seq)
         elif prefix == "witLen.csv":
-            out.write("label,pos,f1,f2,f3,f4,f5")
+            # out.writ("label,pos,f1,f2,f3,f4,f5")
             try:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
