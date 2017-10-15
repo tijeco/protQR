@@ -59,14 +59,13 @@ elif "-with" in sys.argv:
     prefix = "witLen.csv"
 
 
-
-
 else:
-    # input_directory = "data/"
-    # centroid = seqMatrixWitLen("AA").mean(axis=0)
-    # print(centroid)
-
     print("\nplease specify input file name using -not or -with <file_name> \n")
+    sys.exit()
+if "-num" in sys.argv:
+    label = getOptionValue("-num")
+else:
+    print("\nplease specify label using -num <int>\n")
     sys.exit()
 
 
@@ -89,15 +88,20 @@ def seqMatrixNoLen(seq):
         a[i] = factors_dict[seq[i]]
     return a
 with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
+
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         headerStr, seq = ff
         # print(seq)
-        line2write = ""
+        line2write = label+","
         if prefix == "noLen.csv":
+            out.wite("label,f1,f2,f3,f4,f5")
+
             try:
                 centroid = seqMatrixNoLen(seq).mean(axis=0)
+
                 for i in centroid:
+
                     line2write+= str(i)+","
                 # print("writing stuff")
                 out.write(line2write[:-1]+'\n')
@@ -105,6 +109,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 0
                 # print("error with" +seq)
         elif prefix == "witLen.csv":
+            out.wite("label,pos,f1,f2,f3,f4,f5")
             try:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
