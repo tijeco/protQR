@@ -55,3 +55,5 @@ def main():
                                           hidden_units=[10, 20, 10],
                                           n_classes=3,
                                           model_dir="/tmp/iris_model")
+if __name__ == "__main__":
+    main()
