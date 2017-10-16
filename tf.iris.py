@@ -44,3 +44,13 @@ def main():
         filename=IRIS_TEST,
         target_dtype=np.int,
         features_dtype=np.float32)
+    # Specify that all features have real-value data
+# Specify that all features have real-value data
+# Specify that all features have real-value data
+    feature_columns = [tf.feature_column.numeric_column("x", shape=[4])]
+
+  # Build 3 layer DNN with 10, 20, 10 units respectively.
+    classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
+                                          hidden_units=[10, 20, 10],
+                                          n_classes=3,
+                                          model_dir="/tmp/iris_model")
