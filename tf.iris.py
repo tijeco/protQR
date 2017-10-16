@@ -16,6 +16,12 @@ import urllib
 import numpy as np
 import tensorflow as tf
 
+# Data sets
+IRIS_TRAINING = "iris_training.csv"
+IRIS_TRAINING_URL = "http://download.tensorflow.org/data/iris_training.csv"
+
+IRIS_TEST = "iris_test.csv"
+IRIS_TEST_URL = "http://download.tensorflow.org/data/iris_test.csv"
 
 def main():
   # If the training and test sets aren't stored locally, download them.
