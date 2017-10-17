@@ -31,8 +31,9 @@ classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
                                   hidden_units=[500,500,500,500],
                                       n_classes=2,
                                       model_dir="tmp/venom_model",
-                                      optimizer="GradientDescent"
+                                      optimizer="Adagrad"
                                       )
+                                      #Adagrad', 'Adam', 'Ftrl', 'RMSProp', 'SGD'
 
 train_input_fn = tf.estimator.inputs.numpy_input_fn(
     x={"x": np.array(training_set.data)},
