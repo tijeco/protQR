@@ -30,7 +30,12 @@ print(feature_columns)
 classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
                                   hidden_units=[500,500,500,500],
                                       n_classes=2,
-                                      model_dir="tmp/venom_model")
+                                      model_dir="tmp/venom_model"
+                                      optimizer=tf.train.ProximalAdagradOptimizer(
+                                            learning_rate=0.1,
+                                            l1_regularization_strength=0.001
+                                        ))
+
 train_input_fn = tf.estimator.inputs.numpy_input_fn(
     x={"x": np.array(training_set.data)},
     y=np.array(training_set.target),
