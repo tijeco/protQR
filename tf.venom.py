@@ -27,7 +27,8 @@ test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
     features_dtype=np.float32)
 feature_columns = [tf.feature_column.numeric_column("x", shape=[6])]
 print(feature_columns)
-classifier = tf.estimator.DNNClassifier(feature_columns=assert not np.any(np.isnan(feature_columns)),
+print(np.isnan(feature_columns).any(),"THINGS@@@@@@@@@@@@@@@@@")
+classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
                                   hidden_units=[500,500,500,500],
                                       n_classes=2,
                                       model_dir="tmp/venom_model",
