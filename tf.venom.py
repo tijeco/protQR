@@ -31,7 +31,7 @@ classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
                                   hidden_units=[500,500,500,500],
                                       n_classes=2,
                                       model_dir="tmp/venom_model",
-                                      optimizer="Adagrad"
+                                      optimizer="Ftrl"
                                       )
                                       #Adagrad', 'Adam', 'Ftrl', 'RMSProp', 'SGD'
 
