@@ -13,10 +13,10 @@ import urllib.request
 
 import numpy as np
 import tensorflow as tf
-# training_data = "venom.binary.train.csv"
+training_data = "venom.binary.train.csv"
 # test_data = "venom.binary.test.csv"
 # training_data = "venom.binary.train2.csv"
-training_data = "train.perturb"
+# training_data = "train.perturb"
 test_data = "venom.binary.test.csv"
 
 
