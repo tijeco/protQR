@@ -17,7 +17,7 @@ import tensorflow as tf
 # test_data = "venom.binary.test.csv"
 # training_data = "venom.binary.train2.csv"
 training_data = "train.perturb"
-test_data = "venom.binary.test2.csv"
+test_data = "venom.binary.test.csv"
 
 
 training_set = tf.contrib.learn.datasets.base.load_csv_with_header(
