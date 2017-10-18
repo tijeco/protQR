@@ -15,8 +15,8 @@ import numpy as np
 import tensorflow as tf
 # training_data = "venom.binary.train.csv"
 # test_data = "venom.binary.test.csv"
-training_data = "venom.train2.csv"
-test_data = "venom.test2.csv"
+training_data = "venom.binary.train2.csv"
+test_data = "venom.binary.test2.csv"
 
 
 training_set = tf.contrib.learn.datasets.base.load_csv_with_header(
@@ -58,5 +58,10 @@ print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 49044 venom.train.csv
 21020 venom.test.csv
 120,4,setosa,versicolor,virginica
+
+98089,6,pos,f1,f2,f3,f4,f5
+42040,6,pos,f1,f2,f3,f4,f5
+
+
 
 """
