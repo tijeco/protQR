@@ -48,7 +48,14 @@ def seqMatrixWitLen(seq):
     return a
 
 
+def seqMatrixWitLen2(seq):
+    a = np.empty(shape=(len(seq),6))
+    for i in range(len(seq)):
+        a[i][0] = np.arcsin(np.sqrt((i+1.0)/len(seq)))*len(seq)
+        for j in range(len(factors_dict[seq[i]])):
+            a[i][j+1] = factors_dict[seq[i]][j] * np.arcsin(np.sqrt((i+1.0)/len(seq)))
 
+    return a
 
 
 if "-not" in sys.argv:
@@ -57,9 +64,13 @@ if "-not" in sys.argv:
 elif "-with" in sys.argv:
     inFile = getOptionValue("-with")
     prefix = "witLen.csv"
+elif "-with2" in sys.argv:
+    inFile = getOptionValue("-with2")
+    prefix = "witLen2.csv"
 
 
 else:
+    # print(seqMatrixWitLen2("LEDNEM").mean(axis=0),"\n",seqMatrixWitLen2("MENDEL").mean(axis=0))
     print("\nplease specify input file name using -not or -with <file_name> \n")
     sys.exit()
 if "-num" in sys.argv:
@@ -91,13 +102,14 @@ def seqMatrixNoLen(seq):
 with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
     if prefix == "noLen.csv":
         out.write("label,f1,f2,f3,f4,f5\n")
-    elif prefix == "witLen.csv":
+    elif "wit" in prefix:
         out.write("label,pos,f1,f2,f3,f4,f5\n")
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         headerStr, seq = ff
         # print(seq)
         line2write = label+","
+        line2write2 = label+","
         if prefix == "noLen.csv":
 
             try:
@@ -121,4 +133,19 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 out.write(line2write[:-1]+'\n')
             except:
                 0
+        elif prefix == "witLen2.csv":
+            try:
+                centroid = seqMatrixWitLen2(seq).mean(axis=0)
+                centroid2 = seqMatrixWitLen2(seq[::-1]).mean(axis=0)
+
+                for i in centroid:
+                    line2write+= str(i)+","
+                for i in centroid2:
+                    line2write2 += str(i)+","
+                # print("writing stuff")
+                out.write(line2write[:-1]+'\n')
+                out.write(line2write2[:-1]+'\n')
+            except:
+                0
+
                 # print("error with" +seq)
