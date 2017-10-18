@@ -15,7 +15,8 @@ import numpy as np
 import tensorflow as tf
 # training_data = "venom.binary.train.csv"
 # test_data = "venom.binary.test.csv"
-training_data = "venom.binary.train2.csv"
+# training_data = "venom.binary.train2.csv"
+training_data = "train.perturb"
 test_data = "venom.binary.test2.csv"
 
 
@@ -62,6 +63,6 @@ print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 98089,6,pos,f1,f2,f3,f4,f5
 42040,6,pos,f1,f2,f3,f4,f5
 
-
+growforest -train train.fm -rfpred forest.sf -target B:FeatureName -oob -nCores 16 -nTrees 1000 -leafSize 8
 
 """
