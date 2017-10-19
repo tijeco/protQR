@@ -114,8 +114,8 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
     for ff in sequence_iterator:
         headerStr, seq = ff
         # print(seq)
-        line2write = label+","
-        line2write2 = label+","
+        line2write = ""
+        line2write2 = ""
         if prefix == "noLen.csv":
 
             try:
@@ -149,7 +149,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 # for i in centroid2:
                     # line2write2 += str(i)+","
                 # print("writing stuff")
-                out.write(line2write[:-1]+'\n')
+                out.write(line2write[:-1]+","+label+'\n')
                 # out.write(line2write2[:-1]+'\n')
             except:
                 0
