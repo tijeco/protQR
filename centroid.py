@@ -40,6 +40,7 @@ factors_dict = {}
 for i in factors:
     # print(i[0])
     factors_dict[i[0]] = i[1:6]
+
 def seqMatrixWitLen(seq):
     a = np.empty(shape=(len(seq),6))
     for i in range(len(seq)):
@@ -135,8 +136,10 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
                     line2write+= str(i)+","
+                line2write+=ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0]+','
+                line2write+=ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1]+','
                 # print("writing stuff")
-                out.write(line2write[:-1]+'\n')
+                out.write(line2write[:-1]+","+label+'\n')
             except:
                 0
         elif prefix == "witLen2.csv":
