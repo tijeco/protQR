@@ -74,6 +74,7 @@ elif "-with2" in sys.argv:
 else:
     testSeq1 = "MENDEL"
     testSeq2 = "MENDEL"
+    print(ndimage.measurements.center_of_mass(seqMatrixWitLen(testSeq1))[1])
 
     mat1 = seqMatrixWitLen(testSeq1)
     mat2 = seqMatrixWitLen(testSeq2)
@@ -136,8 +137,8 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 for i in centroid:
                     line2write+= str(i)+","
-                line2write+=ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0]+','
-                line2write+=ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1]+','
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
                 # print("writing stuff")
                 out.write(line2write[:-1]+","+label+'\n')
             except:
