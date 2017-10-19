@@ -15,7 +15,7 @@ conda execute -v my_script.py
 
 """
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import random
 import pandas as pd
 import numpy as np
@@ -58,6 +58,7 @@ def seqMatrixWitLen2(seq):
     return a
 
 
+
 if "-not" in sys.argv:
     inFile = getOptionValue("-not")
     prefix = "noLen.csv"
@@ -70,7 +71,12 @@ elif "-with2" in sys.argv:
 
 
 else:
-    # print(seqMatrixWitLen2("LEDNEM").mean(axis=0),"\n",seqMatrixWitLen2("MENDEL").mean(axis=0))
+    testSeq1 = "MENDEL"
+    testSeq2 = "MENDEL"
+
+    mat1 = seqMatrixWitLen(testSeq1)
+    mat2 = seqMatrixWitLen(testSeq2)
+    print(ndimage.measurements.center_of_mass(mat1),ndimage.measurements.center_of_mass(mat2))
     print("\nplease specify input file name using -not or -with <file_name> \n")
     sys.exit()
 if "-num" in sys.argv:
@@ -136,15 +142,15 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
         elif prefix == "witLen2.csv":
             try:
                 centroid = seqMatrixWitLen2(seq).mean(axis=0)
-                centroid2 = seqMatrixWitLen2(seq[::-1]).mean(axis=0)
+                # centroid2 = seqMatrixWitLen2(seq[::-1]).mean(axis=0)
 
                 for i in centroid:
                     line2write+= str(i)+","
-                for i in centroid2:
-                    line2write2 += str(i)+","
+                # for i in centroid2:
+                    # line2write2 += str(i)+","
                 # print("writing stuff")
                 out.write(line2write[:-1]+'\n')
-                out.write(line2write2[:-1]+'\n')
+                # out.write(line2write2[:-1]+'\n')
             except:
                 0
 
