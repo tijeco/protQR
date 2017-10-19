@@ -13,11 +13,11 @@ import urllib.request
 
 import numpy as np
 import tensorflow as tf
-training_data = "venom.binary.train.csv"
+# training_data = "venom.binary.train.csv"
 # test_data = "venom.binary.test.csv"
-# training_data = "venom.binary.train2.csv"
+training_data = "venom.binary.train2.csv"
 # training_data = "train.perturb"
-test_data = "venom.binary.test.csv"
+test_data = "venom.binary.test2.csv"
 
 
 training_set = tf.contrib.learn.datasets.base.load_csv_with_header(
@@ -31,9 +31,9 @@ test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
 feature_columns = [tf.feature_column.numeric_column("x", shape=[6])]
 print(feature_columns)
 classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
-                                  hidden_units=[500,500,500,500,500,500,500,500],
+                                  hidden_units=[500,500,500,500],
                                       n_classes=2,
-                                      dropout=0.02,
+                                    #   dropout=0.02,
                                       model_dir="tmp/venom_model",
                                     #   optimizer=tf.train.ProximalAdagradOptimizer(learning_rate=0.01, l1_regularization_strength=0.001)
                                       )
