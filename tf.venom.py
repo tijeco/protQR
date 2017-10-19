@@ -33,6 +33,7 @@ print(feature_columns)
 classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
                                   hidden_units=[100,100,100,100,100,100,100],
                                       n_classes=2,
+                                      dropout=0.2,
                                       model_dir="tmp/venom_model",
                                     #   optimizer=tf.train.ProximalAdagradOptimizer(learning_rate=0.01, l1_regularization_strength=0.001)
                                       )
