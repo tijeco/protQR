@@ -145,13 +145,14 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                     line2write+= str(i)+","
                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
-                totDot=0
-                totDistance = 0
+                totDot=[]
+                totDistance = []
                 for i in range(len(seqMatrixWitLen(seq))-1):
                     print(totDot,totDistance)
-                    totDot+=multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]])
-                    totDistance+=np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1])
-                line2write+=str(totDot)+','+str(totDistance)
+                    totDot.append(multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]]))
+                    totDistance.append(np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1])))
+
+                line2write+=str(sum(totDot))+','+str(sum(totDistance))
 
                 # print("writing stuff")
                 try:
