@@ -140,6 +140,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
             # out.writ("label,pos,f1,f2,f3,f4,f5")
             try:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
+                print(centroid)
                 for i in centroid:
                     line2write+= str(i)+","
                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
