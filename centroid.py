@@ -120,7 +120,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         headerStr, seq = ff
-        print(seq)
+        # print(seq)
         line2write = ""
         line2write2 = ""
         if prefix == "noLen.csv":
@@ -140,7 +140,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
             # out.writ("label,pos,f1,f2,f3,f4,f5")
             try:
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
-                print(centroid)
+                # print(centroid)
                 for i in centroid:
                     line2write+= str(i)+","
                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
@@ -154,7 +154,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
 
                 line2write+=str(sum(totDot))+','+str(sum(totDistance))
 
-                print("writing stuff",line2write)
+                print(line2write+','+label)
                 try:
                     out.write(line2write[:-1]+","+label+'\n')
                 except:
