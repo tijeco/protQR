@@ -154,11 +154,11 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
 
                 line2write+=str(sum(totDot))+','+str(sum(totDistance))
 
-                print(line2write+','+label)
+                # print(line2write+','+label)
                 try:
                     out.write(line2write[:-1]+","+label+'\n')
                 except:
-                    print("error")
+                    print("error")kill %24
             except:
                 0
         elif prefix == "witLen2.csv":
