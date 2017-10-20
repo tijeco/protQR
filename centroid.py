@@ -22,6 +22,7 @@ import numpy as np
 from scipy import ndimage
 import sys
 from itertools import groupby
+from numpy.linalg import multi_dot
 
 def fasta_iter(fasta_name):
     fh = open(fasta_name)
@@ -72,13 +73,16 @@ elif "-with2" in sys.argv:
 
 
 else:
-    testSeq1 = "MENDEL"
-    testSeq2 = "MENDEL"
-    print(ndimage.measurements.center_of_mass(seqMatrixWitLen(testSeq1))[1])
+    # testSeq1 = "MENDLE"
+    # testSeq2 = "MENDELMENDEL"
+    # print(ndimage.measurements.center_of_mass(seqMatrixWitLen(testSeq1))[1])
+    #
+    # mat1 = seqMatrixWitLen(testSeq1)
+    # mat2 = seqMatrixWitLen(testSeq2)
+    # for i in mat1:
 
-    mat1 = seqMatrixWitLen(testSeq1)
-    mat2 = seqMatrixWitLen(testSeq2)
-    print(ndimage.measurements.center_of_mass(mat1),ndimage.measurements.center_of_mass(mat2))
+        # print(multi_dot([mat1[i], mat1[i+1]]),np.linalg.norm(mat1[i]-mat1[i+1]))
+    # print(totDot,totDistance)
     print("\nplease specify input file name using -not or -with <file_name> \n")
     sys.exit()
 if "-num" in sys.argv:
@@ -111,7 +115,8 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
     if prefix == "noLen.csv":
         out.write("label,f1,f2,f3,f4,f5\n")
     elif "wit" in prefix:
-        out.write("label,pos,f1,f2,f3,f4,f5\n")
+        0
+        # out.write("label,pos,f1,f2,f3,f4,f5\n")
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         headerStr, seq = ff
@@ -139,6 +144,13 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                     line2write+= str(i)+","
                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
+                totDot=0
+                totDistance = 0
+                for i in range(len(seqMatrixWitLen(seq))-1):
+                    totDot+=multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]])
+                    totDistance+=np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1])
+                line2write+=str(totDot)+','+str(totDistance)
+
                 # print("writing stuff")
                 out.write(line2write[:-1]+","+label+'\n')
             except:
