@@ -154,7 +154,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
 
                 line2write+=str(sum(totDot))+','+str(sum(totDistance))
 
-                # print("writing stuff")
+                print("writing stuff")
                 try:
                     out.write(line2write[:-1]+","+label+'\n')
                 except:
