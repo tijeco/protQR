@@ -120,7 +120,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
     sequence_iterator = fasta_iter(inFile)
     for ff in sequence_iterator:
         headerStr, seq = ff
-        # print(seq)
+        print(seq)
         line2write = ""
         line2write2 = ""
         if prefix == "noLen.csv":
