@@ -169,7 +169,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                     line2write+= str(i)+","
                 # for i in centroid2:
                     # line2write2 += str(i)+","
-                # print("writing stuff")
+                print("writing stuff")
                 out.write(line2write[:-1]+","+label+'\n')
                 # out.write(line2write2[:-1]+'\n')
             except:
