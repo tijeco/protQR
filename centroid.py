@@ -148,6 +148,7 @@ with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
                 totDot=0
                 totDistance = 0
                 for i in range(len(seqMatrixWitLen(seq))-1):
+                    print(totDot,totDistance)
                     totDot+=multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]])
                     totDistance+=np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1])
                 line2write+=str(totDot)+','+str(totDistance)
