@@ -10,14 +10,29 @@
 
 import os
 import urllib.request
-
+import sys
 import numpy as np
 import tensorflow as tf
 # training_data = "venom.binary.train.csv"
 # test_data = "venom.binary.test.csv"
-training_data = "venom.binary.train3.csv"
-# training_data = "train.perturb"
-test_data = "venom.binary.test3.csv"
+
+def getOptionValue(option):
+    optionPos = [i for i, j in enumerate(sys.argv) if j == option][0]
+    optionValue = sys.argv[optionPos + 1]
+    return optionValue
+
+
+if "-train" in sys.argv:
+    training_data = getOptionValue("-train")
+else:
+    print("please provide training data with -train")
+    sys.exit()
+
+if "-test" in sys.argv:
+    test_data = getOptionValue("-test")
+else:
+    print("please provide test data with -test")
+    sys.exit()
 
 
 training_set = tf.contrib.learn.datasets.base.load_csv_with_header(
@@ -28,7 +43,7 @@ test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
     filename=test_data,
     target_dtype=np.int,
     features_dtype=np.float32)
-feature_columns = [tf.feature_column.numeric_column("x", shape=[8])]
+feature_columns = [tf.feature_column.numeric_column("x", shape=[10])]
 print(feature_columns)
 classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
                                   hidden_units=[500,500,500,500],
