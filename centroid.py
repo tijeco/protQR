@@ -92,7 +92,7 @@ else:
     sys.exit()
 
 if "-o" in sys.argv:
-    label = getOptionValue("-o")
+    output = getOptionValue("-o")+prefix
 else:
     print("\nplease specify output using -o <int>\n")
     sys.exit()
@@ -116,7 +116,7 @@ def seqMatrixNoLen(seq):
         a[i] = factors_dict[seq[i]]
     return a
 
-with open(inFile.strip().split("/")[-1].split(".")[0]+"_"+prefix,"w") as out:
+with open(output,"w") as out:
     if prefix == "noLen.csv":
         out.write("label,f1,f2,f3,f4,f5\n")
     elif "wit" in prefix:
