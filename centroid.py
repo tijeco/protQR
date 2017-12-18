@@ -91,6 +91,11 @@ else:
     print("\nplease specify label using -num <int>\n")
     sys.exit()
 
+if "-o" in sys.argv:
+    label = getOptionValue("-o")
+else:
+    print("\nplease specify output using -o <int>\n")
+    sys.exit()
 
 factors = pd.read_csv("factors.csv",header='infer').as_matrix()
 factors_dict = {}
