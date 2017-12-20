@@ -78,9 +78,9 @@ def seqMatrixNoLen(seq):
 #     prefix = "witLen2.csv"
 
 
-else:
-    print("\nplease specify input file name using -not or -with <file_name> \n")
-    sys.exit()
+# else:
+#     print("\nplease specify input file name using -not or -with <file_name> \n")
+#     sys.exit()
 # if "-num" in sys.argv:
 #     label = getOptionValue("-num")
 # else:
