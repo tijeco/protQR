@@ -152,7 +152,7 @@ with open("train_"+output,"w") as train_out:
                         line2write+=str(sum(totDot))+','+str(sum(totDistance))
 
                         try:
-                            train_out.write(line2write[:-1]+","+label+'\n')
+                            train_out.write(line2write[:-1]+","+"1"+'\n')
                         except:
                             0
                     else:
@@ -171,7 +171,7 @@ with open("train_"+output,"w") as train_out:
 
                         line2write+=str(sum(totDot))+','+str(sum(totDistance))
                         try:
-                            train_out.write(line2write[:-1]+","+label+'\n')
+                            train_out.write(line2write[:-1]+","+"1"+'\n')
                         except:
                             0
             else:
@@ -191,7 +191,7 @@ with open("train_"+output,"w") as train_out:
 
                 line2write+=str(sum(totDot))+','+str(sum(totDistance))
                 try:
-                    test_out.write(line2write[:-1]+","+label+'\n')
+                    test_out.write(line2write[:-1]+","+"1"+'\n')
                 except:
                     0
 
@@ -222,7 +222,7 @@ with open("train_"+output,"w") as train_out:
                         line2write+=str(sum(totDot))+','+str(sum(totDistance))
 
                         try:
-                            train_out.write(line2write[:-1]+","+label+'\n')
+                            train_out.write(line2write[:-1]+","+"0"+'\n')
                         except:
                             0
                     else:
@@ -241,7 +241,7 @@ with open("train_"+output,"w") as train_out:
 
                         line2write+=str(sum(totDot))+','+str(sum(totDistance))
                         try:
-                            train_out.write(line2write[:-1]+","+label+'\n')
+                            train_out.write(line2write[:-1]+","+"0"+'\n')
                         except:
                             0
             else:
@@ -261,7 +261,7 @@ with open("train_"+output,"w") as train_out:
 
                 line2write+=str(sum(totDot))+','+str(sum(totDistance))
                 try:
-                    test_out.write(line2write[:-1]+","+label+'\n')
+                    test_out.write(line2write[:-1]+","+"0"+'\n')
                 except:
                     0
 
