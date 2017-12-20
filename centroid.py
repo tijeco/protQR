@@ -120,7 +120,7 @@ def randProt(n,seq):
 
 
 
-
+ksize=5
 with open("train_"+output,"w") as train_out:
     with open("test_"+output,"w") as test_out:
         pos_iterator = fasta_iter(positive)
