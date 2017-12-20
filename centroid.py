@@ -67,20 +67,20 @@ def seqMatrixNoLen(seq):
     return a
 
 
-# if "-not" in sys.argv:
-#     inFile = getOptionValue("-not")
-#     prefix = "noLen.csv"
-# elif "-with" in sys.argv:
-#     inFile = getOptionValue("-with")
-#     prefix = "witLen.csv"
-# elif "-with2" in sys.argv:
-#     inFile = getOptionValue("-with2")
-#     prefix = "witLen2.csv"
-#
-#
-# else:
-#     print("\nplease specify input file name using -not or -with <file_name> \n")
-#     sys.exit()
+if "-not" in sys.argv:
+    # inFile = getOptionValue("-not")
+    prefix = "noLen.csv"
+elif "-with" in sys.argv:
+    # inFile = getOptionValue("-with")
+    prefix = "witLen.csv"
+elif "-with2" in sys.argv:
+    # inFile = getOptionValue("-with2")
+    prefix = "witLen2.csv"
+
+
+else:
+    print("\nplease specify input file name using -not or -with <file_name> \n")
+    sys.exit()
 # if "-num" in sys.argv:
 #     label = getOptionValue("-num")
 # else:
