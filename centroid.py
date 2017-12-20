@@ -67,15 +67,15 @@ def seqMatrixNoLen(seq):
     return a
 
 
-if "-not" in sys.argv:
-    # inFile = getOptionValue("-not")
-    prefix = "noLen.csv"
-elif "-with" in sys.argv:
-    # inFile = getOptionValue("-with")
-    prefix = "witLen.csv"
-elif "-with2" in sys.argv:
-    # inFile = getOptionValue("-with2")
-    prefix = "witLen2.csv"
+# if "-not" in sys.argv:
+#     # inFile = getOptionValue("-not")
+#     prefix = "noLen.csv"
+# elif "-with" in sys.argv:
+#     # inFile = getOptionValue("-with")
+#     prefix = "witLen.csv"
+# elif "-with2" in sys.argv:
+#     # inFile = getOptionValue("-with2")
+#     prefix = "witLen2.csv"
 
 
 else:
@@ -88,19 +88,19 @@ else:
 #     sys.exit()
 
 if "-o" in sys.argv:
-    output = getOptionValue("-o")+prefix
+    output = getOptionValue("-o")
 else:
     print("\nplease specify output using -o <int>\n")
     sys.exit()
 
 if "-pos" in sys.argv:
-    positive = getOptionValue("-pos")+prefix
+    positive = getOptionValue("-pos")
 else:
     print("\nplease specify positive using -pos <int>\n")
     sys.exit()
 
 if "-neg" in sys.argv:
-    negative = getOptionValue("-neg")+prefix
+    negative = getOptionValue("-neg")
 else:
     print("\nplease specify negative using -neg <int>\n")
     sys.exit()
