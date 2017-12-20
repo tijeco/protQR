@@ -60,41 +60,49 @@ def seqMatrixWitLen2(seq):
     return a
 
 
-
-if "-not" in sys.argv:
-    inFile = getOptionValue("-not")
-    prefix = "noLen.csv"
-elif "-with" in sys.argv:
-    inFile = getOptionValue("-with")
-    prefix = "witLen.csv"
-elif "-with2" in sys.argv:
-    inFile = getOptionValue("-with2")
-    prefix = "witLen2.csv"
+def seqMatrixNoLen(seq):
+    a = np.empty(shape=(len(seq),5))
+    for i in range(len(seq)):
+        a[i] = factors_dict[seq[i]]
+    return a
 
 
-else:
-    # testSeq1 = "MENDLE"
-    # testSeq2 = "MENDELMENDEL"
-    # print(ndimage.measurements.center_of_mass(seqMatrixWitLen(testSeq1))[1])
-    #
-    # mat1 = seqMatrixWitLen(testSeq1)
-    # mat2 = seqMatrixWitLen(testSeq2)
-    # for i in mat1:
-
-        # print(multi_dot([mat1[i], mat1[i+1]]),np.linalg.norm(mat1[i]-mat1[i+1]))
-    # print(totDot,totDistance)
-    print("\nplease specify input file name using -not or -with <file_name> \n")
-    sys.exit()
-if "-num" in sys.argv:
-    label = getOptionValue("-num")
-else:
-    print("\nplease specify label using -num <int>\n")
-    sys.exit()
+# if "-not" in sys.argv:
+#     inFile = getOptionValue("-not")
+#     prefix = "noLen.csv"
+# elif "-with" in sys.argv:
+#     inFile = getOptionValue("-with")
+#     prefix = "witLen.csv"
+# elif "-with2" in sys.argv:
+#     inFile = getOptionValue("-with2")
+#     prefix = "witLen2.csv"
+#
+#
+# else:
+#     print("\nplease specify input file name using -not or -with <file_name> \n")
+#     sys.exit()
+# if "-num" in sys.argv:
+#     label = getOptionValue("-num")
+# else:
+#     print("\nplease specify label using -num <int>\n")
+#     sys.exit()
 
 if "-o" in sys.argv:
     output = getOptionValue("-o")+prefix
 else:
     print("\nplease specify output using -o <int>\n")
+    sys.exit()
+
+if "-pos" in sys.argv:
+    positive = getOptionValue("-pos")+prefix
+else:
+    print("\nplease specify positive using -pos <int>\n")
+    sys.exit()
+
+if "-neg" in sys.argv:
+    negative = getOptionValue("-neg")+prefix
+else:
+    print("\nplease specify negative using -neg <int>\n")
     sys.exit()
 
 factors = pd.read_csv("factors.csv",header='infer').as_matrix()
@@ -110,40 +118,64 @@ def randProt(n,seq):
     return prot
 
 
-def seqMatrixNoLen(seq):
-    a = np.empty(shape=(len(seq),5))
-    for i in range(len(seq)):
-        a[i] = factors_dict[seq[i]]
-    return a
 
-with open(output,"w") as out:
-    if prefix == "noLen.csv":
-        out.write("label,f1,f2,f3,f4,f5\n")
-    elif "wit" in prefix:
-        0
-        # out.write("label,pos,f1,f2,f3,f4,f5\n")
-    sequence_iterator = fasta_iter(inFile)
-    for ff in sequence_iterator:
-        headerStr, seq = ff
-        # print(seq)
-        line2write = ""
-        line2write2 = ""
-        if prefix == "noLen.csv":
 
-            try:
-                centroid = seqMatrixNoLen(seq).mean(axis=0)
 
-                for i in centroid:
+with open("train_"+output,"w") as train_out:
+    with open("test_"+output,"w") as test_out:
+        pos_iterator = fasta_iter(positive)
+        neg_iterator = fasta_iter(negative)
 
-                    line2write+= str(i)+","
-                # print("writing stuff")
-                out.write(line2write[:-1]+'\n')
-            except:
-                0
-                # print("error with" +seq)
-        elif prefix == "witLen.csv":
-            # out.writ("label,pos,f1,f2,f3,f4,f5")
-            try:
+        for ff in pos_iterator:
+            headerStr, seq = ff
+            if random.choice("AAAT") == "A":
+                seqLength = len(seq)
+                # print(range(ksize))
+                for i in range(ksize):
+                    line2write = ""
+                    if i != 0:
+                        print(seq[i:seqLength])
+                        print(seq[0:-i])
+                        centroid = seqMatrixWitLen(seq[i:seqLength]).mean(axis=0)
+                        # print(centroid)
+                        for i in centroid:
+                            line2write+= str(i)+","
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq[i:seqLength]))[0])+','
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq[i:seqLength]))[1])+','
+                        totDot=[]
+                        totDistance = []
+                        for i in range(len(seqMatrixWitLen(seq[i:seqLength]))-1):
+                            # print(totDot,totDistance)
+                            totDot.append(multi_dot([seqMatrixWitLen(seq[i:seqLength])[i], seqMatrixWitLen(seq[i:seqLength])[i+1]]))
+                            totDistance.append(np.linalg.norm(seqMatrixWitLen(seq[i:seqLength])[i]-seqMatrixWitLen(seq[i:seqLength])[i+1]))
+
+                        line2write+=str(sum(totDot))+','+str(sum(totDistance))
+
+                        try:
+                            train_out.write(line2write[:-1]+","+label+'\n')
+                        except:
+                            0
+                    else:
+                        centroid = seqMatrixWitLen(seq).mean(axis=0)
+                        # print(centroid)
+                        for i in centroid:
+                            line2write+= str(i)+","
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
+                        totDot=[]
+                        totDistance = []
+                        for i in range(len(seqMatrixWitLen(seq))-1):
+                            # print(totDot,totDistance)
+                            totDot.append(multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]]))
+                            totDistance.append(np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1]))
+
+                        line2write+=str(sum(totDot))+','+str(sum(totDistance))
+                        try:
+                            train_out.write(line2write[:-1]+","+label+'\n')
+                        except:
+                            0
+            else:
+                line2write=""
                 centroid = seqMatrixWitLen(seq).mean(axis=0)
                 # print(centroid)
                 for i in centroid:
@@ -158,27 +190,146 @@ with open(output,"w") as out:
                     totDistance.append(np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1]))
 
                 line2write+=str(sum(totDot))+','+str(sum(totDistance))
-
-                # print(line2write+','+label)
                 try:
-                    out.write(line2write[:-1]+","+label+'\n')
+                    test_out.write(line2write[:-1]+","+label+'\n')
                 except:
-                    print("error")
-            except:
-                0
-        elif prefix == "witLen2.csv":
-            try:
-                centroid = seqMatrixWitLen2(seq).mean(axis=0)
-                # centroid2 = seqMatrixWitLen2(seq[::-1]).mean(axis=0)
+                    0
 
+
+        for ff in neg_iterator:
+            headerStr, seq = ff
+            if random.choice("AAAT") == "A":
+                seqLength = len(seq)
+                # print(range(ksize))
+                for i in range(ksize):
+                    line2write = ""
+                    if i != 0:
+                        # print(seq[i:seqLength])
+                        # print(seq[0:-i])
+                        centroid = seqMatrixWitLen(seq[i:seqLength]).mean(axis=0)
+                        # print(centroid)
+                        for i in centroid:
+                            line2write+= str(i)+","
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq[i:seqLength]))[0])+','
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq[i:seqLength]))[1])+','
+                        totDot=[]
+                        totDistance = []
+                        for i in range(len(seqMatrixWitLen(seq[i:seqLength]))-1):
+                            # print(totDot,totDistance)
+                            totDot.append(multi_dot([seqMatrixWitLen(seq[i:seqLength])[i], seqMatrixWitLen(seq[i:seqLength])[i+1]]))
+                            totDistance.append(np.linalg.norm(seqMatrixWitLen(seq[i:seqLength])[i]-seqMatrixWitLen(seq[i:seqLength])[i+1]))
+
+                        line2write+=str(sum(totDot))+','+str(sum(totDistance))
+
+                        try:
+                            train_out.write(line2write[:-1]+","+label+'\n')
+                        except:
+                            0
+                    else:
+                        centroid = seqMatrixWitLen(seq).mean(axis=0)
+                        # print(centroid)
+                        for i in centroid:
+                            line2write+= str(i)+","
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
+                        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
+                        totDot=[]
+                        totDistance = []
+                        for i in range(len(seqMatrixWitLen(seq))-1):
+                            # print(totDot,totDistance)
+                            totDot.append(multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]]))
+                            totDistance.append(np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1]))
+
+                        line2write+=str(sum(totDot))+','+str(sum(totDistance))
+                        try:
+                            train_out.write(line2write[:-1]+","+label+'\n')
+                        except:
+                            0
+            else:
+                line2write=""
+                centroid = seqMatrixWitLen(seq).mean(axis=0)
+                # print(centroid)
                 for i in centroid:
                     line2write+= str(i)+","
-                # for i in centroid2:
-                    # line2write2 += str(i)+","
-                print("writing stuff",line2write)
-                out.write(line2write[:-1]+","+label+'\n')
-                # out.write(line2write2[:-1]+'\n')
-            except:
-                0
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
+                totDot=[]
+                totDistance = []
+                for i in range(len(seqMatrixWitLen(seq))-1):
+                    # print(totDot,totDistance)
+                    totDot.append(multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]]))
+                    totDistance.append(np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1]))
 
-                # print("error with" +seq)
+                line2write+=str(sum(totDot))+','+str(sum(totDistance))
+                try:
+                    test_out.write(line2write[:-1]+","+label+'\n')
+                except:
+                    0
+
+
+
+# with open(output,"w") as out:
+#     # if prefix == "noLen.csv":
+#     #     out.write("label,f1,f2,f3,f4,f5\n")
+#     # elif "wit" in prefix:
+#     #     0
+#         # out.write("label,pos,f1,f2,f3,f4,f5\n")
+#     sequence_iterator = fasta_iter(inFile)
+#     for ff in sequence_iterator:
+#         headerStr, seq = ff
+#         # print(seq)
+#         line2write = ""
+#         # line2write2 = ""
+#         # if prefix == "noLen.csv":
+#         #
+#         #     try:
+#         #         centroid = seqMatrixNoLen(seq).mean(axis=0)
+#         #
+#         #         for i in centroid:
+#         #
+#         #             line2write+= str(i)+","
+#         #         # print("writing stuff")
+#         #         out.write(line2write[:-1]+'\n')
+#         #     except:
+#         #         0
+#         #         # print("error with" +seq)
+#         elif prefix == "witLen.csv":
+#             # out.writ("label,pos,f1,f2,f3,f4,f5")
+#             try:
+#                 centroid = seqMatrixWitLen(seq).mean(axis=0)
+#                 # print(centroid)
+#                 for i in centroid:
+#                     line2write+= str(i)+","
+#                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
+#                 line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
+#                 totDot=[]
+#                 totDistance = []
+#                 for i in range(len(seqMatrixWitLen(seq))-1):
+#                     # print(totDot,totDistance)
+#                     totDot.append(multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]]))
+#                     totDistance.append(np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1]))
+#
+#                 line2write+=str(sum(totDot))+','+str(sum(totDistance))
+#
+#                 # print(line2write+','+label)
+#                 try:
+#                     out.write(line2write[:-1]+","+label+'\n')
+#                 except:
+#                     print("error")
+#             except:
+#                 0
+#         # elif prefix == "witLen2.csv":
+#         #     try:
+#         #         centroid = seqMatrixWitLen2(seq).mean(axis=0)
+#         #         # centroid2 = seqMatrixWitLen2(seq[::-1]).mean(axis=0)
+#         #
+#         #         for i in centroid:
+#         #             line2write+= str(i)+","
+#         #         # for i in centroid2:
+#         #             # line2write2 += str(i)+","
+#         #         print("writing stuff",line2write)
+#         #         out.write(line2write[:-1]+","+label+'\n')
+#         #         # out.write(line2write2[:-1]+'\n')
+#         #     except:
+#         #         0
+#
+#                 # print("error with" +seq)
