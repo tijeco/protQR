@@ -156,7 +156,7 @@ def Dolots(seq,outFile,label):
         else:
             centroid = seqMatrixWitLen(seq).mean(axis=0)
             # print(centroid)
-            for i in centroid_1:
+            for i in centroid:
                 line2write+= str(i)+","
             line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
             line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
