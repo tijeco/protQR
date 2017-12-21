@@ -118,70 +118,73 @@ def randProt(n,seq):
     return prot
 
 def Dolots(seq,outFile,label):
-
-    ksize=5
-    seqLength = len(seq)
-    # print(range(ksize))
-    for i in range(ksize):
-        seq_1 = seq[i:seqLength]
-        seq_2 = seq[0:-i]
-        line2write = ""
-        if i != 0:
-            # print(seq[i:seqLength])
-            # print(seq[0:-i])
-
-            centroid_1 = seqMatrixWitLen(seq_1).mean(axis=0)
-            centroid_2 = seqMatrixWitLen(seq_2).mean(axis=0)
-            # print(centroid)
-            for i in centroid_1:
-                line2write+= str(i)+","
-            line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_1))[0])+','
-            line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_1))[1])+','
-            try:
-                outFile.write(line2write[:-1]+","+label+'\n')
-            except:
-                0
-
-            line2write = ""
-            for i in centroid_2:
-                line2write+= str(i)+","
-            line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_2))[0])+','
-            line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_2))[1])+','
-
-
-            try:
-                outFile.write(line2write[:-1]+","+label+'\n')
-            except:
-                0
-        else:
-            centroid = seqMatrixWitLen(seq).mean(axis=0)
-            # print(centroid)
-            for i in centroid:
-                line2write+= str(i)+","
-            line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
-            line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
-
-
-            try:
-                outFile.write(line2write[:-1]+","+label+'\n')
-            except:
-                0
-
-
-def doless(seq,outFile,label):
-    line2write=""
-    centroid = seqMatrixWitLen(seq).mean(axis=0)
-    # print(centroid)
-    for i in centroid:
-        line2write+= str(i)+","
-    line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
-    line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
-
     try:
-        outFile.write(line2write[:-1]+","+label+'\n')
+        ksize=5
+        seqLength = len(seq)
+        # print(range(ksize))
+        for i in range(ksize):
+            seq_1 = seq[i:seqLength]
+            seq_2 = seq[0:-i]
+            line2write = ""
+            if i != 0:
+                # print(seq[i:seqLength])
+                # print(seq[0:-i])
+
+                centroid_1 = seqMatrixWitLen(seq_1).mean(axis=0)
+                centroid_2 = seqMatrixWitLen(seq_2).mean(axis=0)
+                # print(centroid)
+                for i in centroid_1:
+                    line2write+= str(i)+","
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_1))[0])+','
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_1))[1])+','
+                try:
+                    outFile.write(line2write[:-1]+","+label+'\n')
+                except:
+                    0
+
+                line2write = ""
+                for i in centroid_2:
+                    line2write+= str(i)+","
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_2))[0])+','
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq_2))[1])+','
+
+
+                try:
+                    outFile.write(line2write[:-1]+","+label+'\n')
+                except:
+                    0
+            else:
+                centroid = seqMatrixWitLen(seq).mean(axis=0)
+                # print(centroid)
+                for i in centroid:
+                    line2write+= str(i)+","
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
+                line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
+
+
+                try:
+                    outFile.write(line2write[:-1]+","+label+'\n')
+                except:
+                    0
+
     except:
         0
+def doless(seq,outFile,label):
+    try:
+        line2write=""
+        centroid = seqMatrixWitLen(seq).mean(axis=0)
+        # print(centroid)
+        for i in centroid:
+            line2write+= str(i)+","
+        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
+        line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
 
+        try:
+            outFile.write(line2write[:-1]+","+label+'\n')
+        except:
+            0
+    except:
+        0
 
 
 with open("train_"+output,"w") as train_out:
