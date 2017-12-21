@@ -203,6 +203,6 @@ with open("train_"+output,"w") as train_out:
         for ff in neg_iterator:
             headerStr, seq = ff
             if random.choice("AAAT") == "A":
-                Dolots(seq,train_out,"1")
+                Dolots(seq,train_out,"0")
             else:
-                doless(seq,test_out,"1")
+                doless(seq,test_out,"0")
