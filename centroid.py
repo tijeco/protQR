@@ -132,14 +132,7 @@ def Dolots(seq,outFile,label):
                 line2write+= str(i)+","
             line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq[i:seqLength]))[0])+','
             line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq[i:seqLength]))[1])+','
-            totDot=[]
-            totDistance = []
-            for i in range(len(seqMatrixWitLen(seq[i:seqLength]))-1):
-                # print(totDot,totDistance)
-                totDot.append(multi_dot([seqMatrixWitLen(seq[i:seqLength])[i], seqMatrixWitLen(seq[i:seqLength])[i+1]]))
-                totDistance.append(np.linalg.norm(seqMatrixWitLen(seq[i:seqLength])[i]-seqMatrixWitLen(seq[i:seqLength])[i+1]))
 
-            line2write+=str(sum(totDot))+','+str(sum(totDistance))
 
             try:
                 outFile.write(line2write[:-1]+","+label+'\n')
@@ -154,11 +147,12 @@ def Dolots(seq,outFile,label):
             line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
 
 
-            line2write+=str(sum(totDot))+','+str(sum(totDistance))
-            try:
-                outFile.write(line2write[:-1]+","+label+'\n')
-            except:
-                0
+        try:
+            outFile.write(line2write[:-1]+","+label+'\n')
+        except:
+            0
+
+
 def doless(seq,outFile,label):
     line2write=""
     centroid = seqMatrixWitLen(seq).mean(axis=0)
@@ -167,14 +161,7 @@ def doless(seq,outFile,label):
         line2write+= str(i)+","
     line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[0])+','
     line2write+=str(ndimage.measurements.center_of_mass(seqMatrixWitLen(seq))[1])+','
-    totDot=[]
-    totDistance = []
-    for i in range(len(seqMatrixWitLen(seq))-1):
-        # print(totDot,totDistance)
-        totDot.append(multi_dot([seqMatrixWitLen(seq)[i], seqMatrixWitLen(seq)[i+1]]))
-        totDistance.append(np.linalg.norm(seqMatrixWitLen(seq)[i]-seqMatrixWitLen(seq)[i+1]))
-
-    line2write+=str(sum(totDot))+','+str(sum(totDistance))
+    
     try:
         outFile.write(line2write[:-1]+","+label+'\n')
     except:
