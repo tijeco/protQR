@@ -118,12 +118,13 @@ def randProt(n,seq):
     return prot
 
 def Dolots(seq,outFile,label):
-    seq_1 = seq[i:seqLength]
-    seq_2 = seq[0:-i]
+
     ksize=5
     seqLength = len(seq)
     # print(range(ksize))
     for i in range(ksize):
+        seq_1 = seq[i:seqLength]
+        seq_2 = seq[0:-i]
         line2write = ""
         if i != 0:
             # print(seq[i:seqLength])
