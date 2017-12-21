@@ -200,8 +200,8 @@ with open("train_"+output,"w") as train_out:
                 doless(seq,test_out,"1")
 
 
-        for ff in neg_iterator:
-            headerStr, seq = ff
+        for gg in neg_iterator:
+            headerStr, seq = gg
             if random.choice("AAAT") == "A":
                 Dolots(seq,train_out,"0")
             else:
