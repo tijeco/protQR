@@ -6,8 +6,7 @@ with open(sys.argv[1]) as f:
     next(f)
     for line in f:
         row = line.strip().split(",")
-        print(1)
-        for i in range(len(row[-1])):
+        for i in range(len(row[:-1])):
             if i in min_dict:
                 if min_dict[i] > float(row[i]):
                     min_dict[i] = float(row[i])
