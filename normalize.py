@@ -9,15 +9,15 @@ with open(sys.argv[1]) as f:
         print(1)
         for i in range(len(row[-1])):
             if i in min_dict:
-                if min_dict[i] > row[i]:
-                    min_dict[i] = row[i]
+                if float(min_dict[i]) > row[i]:
+                    float(min_dict[i]) = row[i]
             else:
-                min_dict = row[i]
+                float(min_dict[i]) = row[i]
             if i in max_dict:
-                if max_dict[i] < row[i]:
-                    max_dict[i] = row[i]
+                if float(max_dict[i]) < row[i]:
+                    float(max_dict[i]) = row[i]
                 else:
-                    max_dict = row[i]
+                    float(max_dict[i]) = row[i]
 
 print(min_dict)
 print(max_dict)
