@@ -9,6 +9,7 @@ with open(sys.argv[1]) as f:
             line1 == False
             continue
         row = line.strip().split(",")
+        print(1)
         for i in range(len(row[-1])):
             if i in min_dict:
                 if min_dict[i] > row[i]:
