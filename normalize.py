@@ -18,7 +18,7 @@ with open(sys.argv[1]) as f:
             else:
                 min_dict[i] = float(row[i])
 
-    for line in f:
-        print(line)
+    for lines in f:
+        print(lines)
 print(min_dict)
 print(max_dict)
