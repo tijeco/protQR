@@ -1,7 +1,7 @@
 args <- commandArgs(TRUE)
 x <- as.double(args[1])
 
-dat <- read.csv(x,header=T)
+dat <- read.csv(x)
 
 
 scaled.dat <- scale(dat)
