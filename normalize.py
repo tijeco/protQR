@@ -3,11 +3,8 @@ line1 = True
 max_dict = {}
 min_dict = {}
 with open(sys.argv[1]) as f:
-
+    next(f)
     for line in f:
-        if line1:
-            line1 == False
-            continue
         row = line.strip().split(",")
         print(1)
         for i in range(len(row[-1])):
