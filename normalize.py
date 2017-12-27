@@ -24,6 +24,7 @@ with open(sys.argv[1]) as f:
 # normalized = (x-min(x))/(max(x)-min(x))
 print(min_dict)
 print(max_dict)
+line1=True
 with open(sys.argv[1].replace("csv","norm.csv"),"w") as out:
     with open(sys.argv[1]) as f:
 
