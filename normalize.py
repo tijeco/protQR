@@ -24,14 +24,18 @@ with open(sys.argv[1]) as f:
 # normalized = (x-min(x))/(max(x)-min(x))
 print(min_dict)
 print(max_dict)
-with open(sys.argv[1]) as f:
+with open(sys.argv[1].replace("csv","norm.csv"),"w") as out:
+    with open(sys.argv[1]) as f:
 
-    for line in f:
-        if line1:
-            line1=False
-            continue
+        for line in f:
+            if line1:
+                out.write(line)
+                line1=False
+                continue
 
-        row = line.strip().split(",")
-        line2write=""
-        for i in range(len(row[:-1])):
-            line2write+=str((float(row[i])-min_dict[i])/(max_dict[i]-min_dict[i]))+","
+            row = line.strip().split(",")
+            line2write=""
+            for i in range(len(row[:-1])):
+                line2write+=str((float(row[i])-min_dict[i])/(max_dict[i]-min_dict[i]))+","
+            line2write+=(row[-1]+"\n")
+            out.write(line2write)
