@@ -3,8 +3,11 @@ line1 = True
 max_dict = {}
 min_dict = {}
 with open(sys.argv[1]) as f:
-    next(f)
+
     for line in f:
+        if line1:
+            line1==False
+            continue
         row = line.strip().split(",")
         for i in range(len(row[:-1])):
             if i in max_dict:
@@ -18,7 +21,6 @@ with open(sys.argv[1]) as f:
             else:
                 min_dict[i] = float(row[i])
 
-    for lines in f:
-        print(lines)
+
 print(min_dict)
 print(max_dict)
