@@ -34,4 +34,4 @@ with open(sys.argv[1]) as f:
         row = line.strip().split(",")
         line2write=""
         for i in range(len(row[:-1])):
-            line2write+=str((row[i]-min_dict[i])/(max_dict[i]-min_dict[i]))+","
+            line2write+=str((float(row[i])-min_dict[i])/(max_dict[i]-min_dict[i]))+","
