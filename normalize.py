@@ -7,6 +7,7 @@ with open(sys.argv[1]) as f:
     for line in f:
         if line1:
             line1==False
+            print(line1)
         else:
 
             row = line.strip().split(",")
