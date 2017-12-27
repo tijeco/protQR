@@ -29,6 +29,7 @@ with open(sys.argv[1].replace("csv","norm.csv"),"w") as out:
 
         for line in f:
             if line1:
+                print(line)
                 out.write(line)
                 line1=False
                 continue
