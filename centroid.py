@@ -119,7 +119,7 @@ def randProt(n,seq):
 
 def Dolots(seq,outFile,label):
     try:
-        ksize=5
+        ksize=2
         seqLength = len(seq)
         # print(range(ksize))
         for i in range(ksize):
