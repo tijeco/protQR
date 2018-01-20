@@ -43,11 +43,11 @@ test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
     filename=test_data,
     target_dtype=np.int,
     features_dtype=np.float32)
-feature_columns = [tf.feature_column.numeric_column("x", shape=[463])]
+feature_columns = [tf.feature_column.numeric_column("x", shape=[4])]
 print(feature_columns)
 classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
                                   hidden_units=[50,50,50],
-                                      n_classes=2,
+                                      n_classes=3,
                                       dropout=0.02,
                                       model_dir="tmp/venom_model",
                                       optimizer=tf.train.ProximalAdagradOptimizer(learning_rate=0.01, l1_regularization_strength=0.001)
