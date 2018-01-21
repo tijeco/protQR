@@ -22,8 +22,8 @@ with open(sys.argv[1]) as f:
             else:
                 min_dict[i] = float(row[i])
 # normalized = (x-min(x))/(max(x)-min(x))
-print(min_dict)
-print(max_dict)
+# print(min_dict)
+# print(max_dict)
 line1=True
 with open(sys.argv[1].replace("csv","norm.csv"),"w") as out:
     with open(sys.argv[1]) as f:
@@ -38,6 +38,8 @@ with open(sys.argv[1].replace("csv","norm.csv"),"w") as out:
             row = line.strip().split(",")
             line2write=""
             for i in range(len(row[:-1])):
+                # 2* (x-min)/(max)
                 line2write+=str( 2.0*(float(row[i]) - min_dict[i]) / (max_dict[i]-min_dict[i]) -1.0)+","
+                print(str( 2.0*(float(row[i]) - min_dict[i]) / (max_dict[i]-min_dict[i]),min_dict[i],max_dict[i],row[i])
             line2write+=(row[-1]+"\n")
             out.write(line2write)
