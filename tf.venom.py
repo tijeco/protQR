@@ -57,7 +57,7 @@ classifier = tf.estimator.DNNClassifier(feature_columns=feature_columns,
 train_input_fn = tf.estimator.inputs.numpy_input_fn(
     x={"x": np.array(training_set.data)},
     y=np.array(training_set.target),
-    num_epochs=None,
+    num_epochs=3,
     shuffle=True)
 classifier.train(input_fn=train_input_fn, steps=2000)
 
