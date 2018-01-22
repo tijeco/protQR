@@ -59,7 +59,7 @@ train_input_fn = tf.estimator.inputs.numpy_input_fn(
     y=np.array(training_set.target),
     num_epochs=3,
     shuffle=True)
-classifier.train(input_fn=train_input_fn, steps=10000)
+# classifier.train(input_fn=train_input_fn, steps=10000)
 
 test_input_fn = tf.estimator.inputs.numpy_input_fn(
     x={"x": np.array(test_set.data)},
