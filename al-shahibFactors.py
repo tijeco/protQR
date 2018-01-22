@@ -258,4 +258,7 @@ input_fasta = fasta_iter(input_file)
 with open(input_file+".shahib.csv","w") as out:
     for ff in input_fasta:
         headerStr, seq = ff
-        out.write(makeFactors(seq)+","+sys.argv[2]+"\n")
+        try:
+            out.write(makeFactors(seq)+","+sys.argv[2]+"\n")
+        except:
+            None
